@@ -1,0 +1,11 @@
+#LOCATION OF ENVIRONMENT VARIABLES 
+"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+
+#PRINT ALL ENVIRONMENT VARIABLES
+reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+
+#NOTE: After you include python as part of the Path enviornment vairable string, you can launch python from within command prompt
+
+#printing specific environment variables in powershell
+echo $Env:VariableName 
+echo $Env:ProgramFiles

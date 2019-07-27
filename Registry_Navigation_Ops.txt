@@ -1,0 +1,70 @@
+#
+# WINDOWS REGISTRY OPERATIONS IN POWERSHELL 
+# 7/27/19
+# http://woshub.com/how-to-access-and-manage-windows-registry-with-powershell/
+
+#Display list of available drivers (to display registry branches) HKEY_CURRENT_USER(HKCU) and HKEY_LOCAL_MACHINE(HKLM)
+	get-psdrive
+
+#How to navigate registory values : branches of registry are addrressed like drives, to go to the root of hklm you use below 
+	cd HKLM:\
+
+#How to go to specific branch of registry (ex. the one responsible for setting max file path length
+	Set-Location -Path HKLM:\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem
+
+#how to display contents of the key
+	dir OR Get-ChildItem
+
+#NOTE: from PowerShell point of view, a registry branch (a key) is a file analog,
+#	   the parameters stored in this registry key are the properties of this file.
+
+#To get the parameters of this branch, use Get-Item cmdlet
+	Get-Item . OR Get-Item -Path HKLM:\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem
+
+#How to address a specific key's parameter use Get-ItemProperty. assign contents 
+#of the branch to variable and get the value of the parameter 
+#Note: Stores all registry parameter values associated with the 'key'~registry parent directory to variable for reference 
+#NOTE: each parameter value associated with parent registry can be accessed from the below variable
+	$FileSysRegVars= Get-ItemProperty –Path ‘HKLM:\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem'
+	$FileSysRegVars.LongPathsEnabled
+	$FileSysRegVars.RefsDisableLastAccessUpdate
+
+#HOW TO CHANGE THE REGISTRY VALUE (MUST RUN POWERSHELL AS ADMIN)
+#To change the value of LongPathsEnabled use the Set-ItemProperty cmdlet
+	Set-ItemProperty -Path 'HKLM:\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem' -Name LongPathsEnabled -Value 1
+
+#HOW TO CREATE A NEW REGISTER KEY OR PARAMETER to add a new registry key use New-Item command
+#Create a new key with name NewKey 
+	$RegistryPath = "HKCU:\Control Panel\Desktop"
+	New-Item –Path $HKCU_Desktop –Name NewKey
+
+#Add a new string parameter with the name SuperParamString and the value file_name.txt for the created key:
+	New-ItemProperty -Path $HKCU_Desktop\NewKey -Name "SuperParamString" -Value ”file_name.txt”  -PropertyType "String"
+
+#DELETE A REGISTRY KEY OR PARAMETER 
+#NOTE: -Recursive key shows all subkeys have to be removed recursivly without confirmation 
+	$HKCU_Desktop= "HKCU:\Control Panel\Desktop"
+	Remove-ItemProperty –Path $HKCU_Desktop\NewKey –Name "SuperParamString"
+	Remove-Item –Path $HKCU_Desktop\NewKey –Recurse
+
+#To remove all items in the branch but not the branch itself
+	Remove-Item –Path $HKCU_Desktop\NewKey\* –Recurse
+
+#HOW TO RENAME A KEY OR PARAMETER 
+	Rename-ItemProperty –path ‘HKCU:\Control Panel\Desktop\NewKey’ –name "SuperParamString" –newname “OldParamString”
+
+#Rename registry key 
+	Rename-Item -path 'HKCU:\Control Panel\Desktop\NewKey' OldKey	
+	
+#SEARCH REGISTRY USING POWERSHELL 
+#ex. SEARCH HKCU direcotry for parameters whose name contains *dpi* key
+$Path = (Get-ItemProperty ‘HKCU:\Control Panel\Desktop’)
+$Path.PSObject.Properties | ForEach-Object {
+If($_.Name -like '*dpi*'){
+Write-Host $_.Name ' = ' $_.Value
+}
+}
+
+#REMOTE ACCESS TO REGISTRY USING POWERSHELL 
+# You can connect to a remote computer either using WinRM (Invoke-Command or Enter-PSSession):
+Invoke-Command –ComputerName srv-fs1 –ScriptBlock { Get-ItemProperty -Path 'HKLM:\System\Setup' -Name WorkingDirectory}

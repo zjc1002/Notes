@@ -1,0 +1,10 @@
+#enable developer mode in windows
+1.  go to settings 
+2.choose update and security 
+3. select "For developers"
+4. click "Developer Mode" and select yes 
+
+#how / where python is installed with visual studio
+#NOTE: visual studio creates executables that contain symlinks to target paths , to find the source install 
+#of python you must identify the target path of the python.exe shortcut (just search python in searchbar , find the .exe, and select properties) 
+"C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\python.exe"
