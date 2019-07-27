@@ -1,0 +1,17 @@
+###DASH 
+#@callbacks are sequencially executed 
+#note: any time an object within a callback is edited within the dash app, the callback associated with that function is automatically executed, and ALL callbacks dependent on the initital callback are run
+
+#DATA SOURCING
+#name of div to hold data(209)
+html.Div(id=name_of_div_forDownstream, ?)
+
+
+#the first callback defines the dataset that all other callbacks use for processing(so always subset full dataset at this callback so all further callbacks only use a subset of the full dataframe) 
+
+
+#callback functional form 
+@callback 
+	#result object deffinition
+	#input object deffinition
+		#function to populate result object with 

@@ -1,0 +1,289 @@
+#check when last commit was to a remote branch 
+git log remotename/branchname
+
+#create a local branch called 'myfeature' from local branch 'develop'
+#https://nvie.com/posts/a-successful-git-branching-model/
+git checkout -b myfeature develop
+
+#merged finished feature (THATS IN A DIFF BRANCH) 
+#--no-ff enables effective
+#https://nvie.com/posts/a-successful-git-branching-model/
+$ git checkout develop
+Switched to branch 'develop'
+$ git merge --no-ff myfeature
+Updating ea1b82a..05e9557
+(Summary of changes)
+$ git branch -d myfeature
+Deleted branch myfeature (was 05e9557).
+$ git push origin develop
+
+
+
+
+#resources 
+#https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+
+#clone Single branch of DTCC/NegNews repo from degange git
+git clone --single-branch -b dev http://10.246.59.52/j.degange/DTCC-demo
+git clone --single-branch -b dev http://10.246.59.52/z.carideo/NN_Kafka
+
+http://10.246.59.52/z.carideo
+origin  http://10.246.59.52/j.degange/DTCC-demo 
+
+
+#overwrite one branch with another 
+# overwrite master with contents of seotweaks branch (seotweaks > master)
+git checkout seotweaks    # source name
+git merge -s ours master  # target name
+git checkout master       # target name
+git merge seotweaks       # source name
+
+#Git Repo 
+git: 10.246.59.52
+user: z.carideo 
+password:ZachPleaseRemember1
+
+
+#https://www.tutorialspoint.com/git/git_quick_guide.htm
+#git command reference 
+#username: Zachary.c 
+#password: password
+
+#all commits in a specific range 
+git log --after="2013-11-12 00:00" --before="2013-11-12 23:59
+
+
+#look at all commits for a specific file 
+git log --follow -- filename
+
+
+#identify all commits from one branch but not in another (b1 not in b2) 
+git cherry -v b1 b2
+
+#compare against prior commits 
+# uncommited file to HEAD
+git diff <path>
+
+# uncommited file to before last commit
+git diff HEAD^ -- <path>
+
+#last commit to before last commit
+git diff HEAD^ HEAD -- <path>
+
+#difference between HEAD and n-th grandparent
+git diff HEAD~n HEAD -- <path>
+
+#Another cool feature is whatchanged command
+git whatchanged -- <path>
+
+
+#check all line items in a file and who committed them 
+git blame file 
+
+#COMMIT ALL FILES INCLUDING NEW ONES (BATCH COMMIT) 
+git add -A && git commit -m "Your Message"
+
+#COMMIT ALL CHANGED / DELETED FILES BUT D-O NOT NEWLY ADDED ONES 
+git commit -am 
+
+#REVERT COMMITS
+#https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit
+
+#my repo 
+git@http://10.246.59.52/ 
+ 
+ssh -T git@10.246.59.23ksl
+
+##############
+###COMMANDS###
+##############
+#list of root directories 
+mount 
+
+#delete branch locally and remote 
+git push --delete <remote_name> <branch_name>
+git branch -d <branch_name>
+
+#check all branches and head versions on remote 
+git ls-remote origin
+
+#remove a file from being tracked 
+git rm --cached <file>
+
+#remove locked git index file (use when error occurs upon commit i
+rm -f ./.git/index.lock
+
+#check config params 
+git config --list 
+
+#git status of specific branch (here master) 
+git symbolic-ref --short HEAD
+
+#branch upstream of current 
+git rev-parse --symbolic-full-name '@{upstream}'
+
+#Initailize a gitrepo using an existing file directory (start controlling the file directory with git) 
+#1.go to file directory you want to create gitrepo for 
+cd C:\Users\caridza\Desktop\pythonScripts\fci-negative-news-api - CORE
+
+#2. Initalize new git(This creates a new subdirectory named .git that contains all of your necessary repository files aka, a Git repository skeleton.) 
+git init 
+	
+	
+#check validity of remote repo url 
+git ls-remote http://10.246.59.52/z.carideo/NN_Kafka #http://10.246.59.52/j.degange/DTCC-demo 
+git remote add aa_bitbucket http://10.246.59.52/j.degange/DTCC-demo
+
+#cloning a repository 
+#That creates a directory named libgit2, initializes a .git directory inside it
+#pulls down all the data for that repository, and checks out a working copy of the latest version
+git clone http://10.246.59.23/b.yang/NN_Gitlab 
+git clone http://10.246.59.52/z.carideo/NN_Kafka 
+git clone git@10.246.59.52:b.yang/NN_Gitlab.git
+#check branches 
+git branch -access
+
+#show old version of file (n commits from head) 
+git show HEAD~4:src/main.c
+
+#compare files on remote vs local branch 
+git diff origin/master -- [local-path]
+
+#create a new branch(from the master branch) 
+#this enables you to edit the files wthout editing the master branch 
+#must committ the changes made on zackdev back to the master branch 
+git checkout -b zackdev #creates a new branch 
+git commit -am "commit on branch zackdev"
+git merge master zackdev #merge branches 
+
+#merge conflicts: when a file is edited in different branches, you will
+#not be able to merge the changes between the two without resolving the merge 
+#conflict. 
+#Merge conflict begins <<<<<<< 
+#the changes from the HEAD or base branch after the line <<<<<<< HEAD
+#now add the changes 
+git add . 
+git commit branchofchoice
+git merge branch1 branch2
+git push 
+
+#process to commit and push changes 
+git add file 
+git commit branch
+git push remotehost branch 
+
+#process to pull changes from the server 
+git fetch #look at change before pulling  (shows u the current status of the remote branch you are pushing / pulling to) 
+git pull 
+
+#process to commit changes to remote branch that is named something different on the local repo 
+git push origin local-name:remote-name
+
+#This will tell git you want to start ignoring the changes to the file
+git update-index --assume-unchanged path/to/file
+#When you want to start keeping track again
+git update-index --no-assume-unchanged path/to/file 
+
+#revert back to a commit that occured n minutes ago 
+git reset --hard master@{"10 minutes ago"}
+
+
+#add a file to a git repo (start tracking a file) 
+git add c:/filepath
+
+#stage files for committing 
+#record changes to the repository 
+git commit -m "comments about git submission"
+
+#Download objects and refs from another repo 
+git fetch 
+
+#dif between current branch and other branch 
+git diff --stat --color zack_test..zack_test_vol2
+
+#show changes between commits, commit and workign tree , etc.
+git diff
+git diff --name-status master #compare current checkedout branch against master branch 
+git diff --stat --color w2v..master
+git difftool -d w2v zackdev #use diff tool to check differences between 2 branches
+
+#show the most recent tag that is reachable from a commit 
+git describe 
+
+#remove untracked files from the working tree 
+git clean 
+
+#cleanup unnecessary files and optimize local repo 
+git gc 
+
+#show log 
+git log 
+
+#summarize git log output 
+git shortlog 
+
+#stash the changes in a dirty worky drectory away 
+git stash 
+git stash list #list all stashed versions 
+git stash pop #pull saved changes from stash back onto working directory
+
+#add or inspet object notes 
+git notes 
+
+#fetch from and merge with another repo or a local branch 
+git pull 
+
+#update remote refs along with associated objects
+git push 
+
+#join two or more development histories together 
+git merge 
+
+#reset current head to the specified state 
+git reset 
+
+#revert some existing commits 
+git revert 
+
+#show changes using common diff tools (THE SHIT)
+git difftool
+
+#browse working repo in gitweb 
+git instaweb	
+
+#prune unreachable objects from repo 
+git prune
+
+#add remote repo and push files from master to remote
+#before below, must login to github and create a new repo 
+#from console tell git to add a remote origin to communicate with local git instance
+#git remote add zack_gitlab git@GraphGit.414wkq1pdwiezdbxxtvnzyij1g.jx.internal.cloudapp.net:z.carideo/Zack_Test.git
+git remote add zack_gitlab http://GraphGit.414wkq1pdwiezdbxxtvnzyij1g.jx.internal.cloudapp.net/z.carideo/
+git push -u zack_gitlab --all
+git push -u origin --tags
+
+git remote add aa_bitbucket git@GraphGit.414wkq1pdwiezdbxxtvnzyij1g.jx.internal.cloudapp.net/j.degange/DTCC-demo.git #http://10.246.59.52/j.degange/DTCC-demo
+
+
+git remote add origin git@github.com:username/newrepo
+#push files from master to remote origin 
+git push -u zack_gitlab master 
+
+
+#change existing remote 
+git remote set-url zack_gitlab http://GraphGit.414wkq1pdwiezdbxxtvnzyij1g.jx.internal.cloudapp.net/z.carideo/
+git remote add origin ssh://git@DeepGit.414wkq1pdwiezdbxxtvnzyij1g.jx.internal.cloudapp.net:zachary.c/NegNews.git
+git remote add origin git@10.246.59.23:zachary.c/NegNews.git
+#check all remotes  
+git remote -v
+
+#remove existig remote 
+git remote remove zack_gitlab
+###############################
+#review changes after a commit#
+###############################
+#1.print log 
+git log 
+#2.extract SHA-1 commit ID and pass to git show 
+git show cb4104ut109ut0949475702
+

@@ -1,0 +1,28 @@
+###HYPER-V INSTALLATION###
+####https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v
+####Note:Hyper-V is built into Windows as an optional feature -- there is no Hyper-V download.
+
+
+#1.Active hyper-v service through powershell(open as admin and execute below command)
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+
+#2.Create a VM and install its operating system(Win10 Version:Before Windows 10 Creators update)
+##2.1:Create A Virual network(create a connection to network the VM can use) 
+##Note: Hyper-V has three types of virtual switches -- external, internal, and private. 
+##create an external switch to share your computer's network with the virtual machines running on it.
+##setting up the external switch will enable any virutal machine to connect to the internet through your computers network connection 
+1.open Hyper-V Manager 
+2.Select the server in the left pane, or click "Connect to Server..." in the right pane.
+3.In Hyper-V Manager, select Virtual Switch Manager... from the 'Actions' menu on the right.
+4.Under the 'Virtual Switches' section, select New virtual network switch.
+5.Under 'What type of virtual switch do you want to create?', select External.
+6.Select the Create Virtual Switch button.
+7.Under ‘Virtual Switch Properties’, give the new switch a name such as External VM Switch.
+8.Under ‘Connection Type’, ensure that External Network has been selected.
+9.Select the physical network card to be paired with the new virtual switch. This is the network card that is physically connected to the network.
+
+
+
+
+
+##2.2:Create a new Virtual Machine(VM)

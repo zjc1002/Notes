@@ -1,0 +1,429 @@
+#############################
+#####IP SPECIFIC COMMANDS####
+#############################
+
+#Identiy DNS suffix (copy he primary DNS Suffix and a DNS Suffix Search List (ey.net))
+ipconfig /all
+
+#if you don't have access to the dhcp server to see what it is sending, the easiest way would be to open a site in ie, then go to a command prompt. Type
+#This will provide a list of connections made with the process id of each process. 
+#Go to Task Manager, and select View/Select Columns and enable PID (Process Identifier). 
+#Look for the PID of iexplore.exe in the list returned by netstat -ban This will reveal the proxy ip and port.
+
+#list all network processes and associated pid 
+netstat -ao 
+
+#list only active network processes and PIDs
+netstat -o
+
+#get info on pure number form 
+netstat -an 
+
+#######################
+#######################
+#######################
+
+#######################
+#########NOHUP#########
+#######################
+#show all processes and background scripts 
+ps auxw
+ps auxr
+
+#Run script in background 
+nohup /path/to/test.py &
+
+#Run script in background after disconnecting from server with no noup.data output file
+nohup python3 SentLevel_BackGroundRun.py > /dev/null 2>&1&
+
+
+#navigate back to root 
+cd /.
+
+#create symlink to eliminate need to copy files across the same host 
+#symlink enables you to create a file that references another file in another location without having to copy the actual file 
+ln -s "path2file2link" nameofsymlink
+
+#strip output from jupyter notebook (source on folder) 
+strip_output.py < my_notebook.ipynb > my_notebook_stripped.ipynb
+
+#identify location where packages are installed globally 
+which scrapyd version 
+
+#find explict path / folder of a file 
+locate filename
+
+#show only hidden folders in directory
+ls -ap | egrep "^\..*/$"
+ 
+#get list of size of all files in a directory 
+du -sbh ./DTCC_Docker_V1
+
+#copy a directory from local to server 
+#1.get local host ip information in cmd: ipconfig 
+#2.extract IPv4 Address for (Default Switch):  172.29.17.97
+#3.
+#Somnath password:verydeepLearning97
+scp -r /home/docadmin/AlastairG/Neg_News/containerization/* nlpsomnath@10.246.59.29:/home/nlpsomnath/zackc/
+scp -r /home/docadmin/Mueller/* nlpsomnath@10.246.59.29:/home/nlpsomnath/NegNews/Mueller/
+scp -r /home/docadmin/ZackC/* nlpsomnath@10.246.59.29:/home/nlpsomnath/NegNews/zackc/
+scp -r /home/docadmin/Mueller/DTCC_Img/DTCC-demo.requirments.txt  nlpsomnath@10.246.59.29:/home/nlpsomnath/NegNews/mueller/DTCC_Img/
+scp -r /home/docadmin/Mueller/DTCC_Img/DTCC-demo/nn_base/nn_dateextractor.py nlpsomnath@10.246.59.29:/home/nlpsomnath/NegNews/rebase/NN_Kafka/nn_base/
+scp -r /home/docadmin/Mueller/DTCC_Img/DTCC-demo/nn_base/nn_dateextractor.py nlpsomnath@10.246.59.29:/home/nlpsomnath/NegNews/rebase/NN_Kafka/nn_base/
+
+#chmod
+#gove read  write / execute permoissions to a folder 
+sudo chmod -R 777 /home/nlpsomnath/NegNews/Alastair/KYC_new/NN_Kafka/kafka_tools/kafka
+#recursivly give read,write to all users, groups, and others for a directory and all child directories (and files) 
+chmod -R 776 mydirectory
+
+#swapping out kafka files (not needed) 
+scp -r /home/nlpsomnath/NegNews/Alastair/KYC_new/NN_Kafka/kafka_tools/*  docadmin@10.246.59.58:/home/docadmin/Mueller/DTCC_Img/DTCC-demo/kafka_tools/
+#kafka subfolder in docadmin: kafka_2.11-2.0.0
+#kafka subfolder in nlpsomnath: kafka
+
+#copy directory 
+cp -r /path/to/directory /path/to/location/new-name
+
+#compare 2 files in unix 
+filepath1 diff filepath2
+diff /home/docadmin/Mueller/DTCC_Img/DTCC-demo/nn_main.py /home/docadmin/ZackC/NegNews_kafka/NN_Kafka/nn_main.py 
+diff /home/docadmin/Mueller/DTCC_Img/DTCC-demo/nn_base/nn_textprocess.py /home/docadmin/ZackC/NegNews_kafka/NN_Kafka/nn_base/nn_textprocess.py 
+
+#make file bash file executable so you can run from terminal 
+#navigate to directory of file and execute the below chmode 
+chmod +x filename.sh 
+
+#sudo vs --user
+instead of sudo , use --user at the end of a linux command to indicate you are an admin, this will let you install appliations and you can do this in jupyter 
+
+#look at all processes running on all ports and the names of the programs associated with them 
+
+#all running pids 
+ps -aux | less
+################################
+######PERFORMANCE MONITORING####
+################################
+vmstat #virutal memory , disk, process , cpu stats 
+htop #visual view of resources 
+lsof #list of open files 
+
+#show all processes running on port 6800
+netstat -ant -p
+netstat -ltnp | grep -w ':2181' 
+
+#view sorted list of folders by total size 
+du -hs * | sort -h
+
+#top ten files/directories by size 
+du -a /var | sort -n -r | head -n 10
+
+
+#identify all git repos on compute 
+find / -name ".git"
+#find all files deleted from a directory in past 1 day
+find /home/ZackC/Alisheik/RegulatoryNews/ -mtime -1
+
+#kill all processes on a specific port 
+kill -9 $(lsof -t -i:5760)
+kill -9 $(lsof -t -i:2181)
+kill -9 $(lsof -t -i:9092)
+kill -9 $(lsof -t -i:92698)
+kill -9 $(lsof -t -i:52698)
+kill -9 $(lsof -t -i:6006)
+kill -9 $(lsof -t -i:5050)
+kill -9 $(lsof -t -i:6800)
+
+#kill pids 
+kill -9 112869
+kill -9 23571
+
+#kill jupyter 
+jupyter notebook stop 
+
+#compare 2 directories and get all differences between the files in each 
+1. run cmd.exe to get a command prompt 
+2. open another command prompt (repeat above) 
+3. in each windo navigate to the directories you want to compare 
+4. type dir /b > A.txt into one window and dir/b > B.txt into the other . This geneerates two text files that list teh contents of each direcotry. The /b flag means bare, which strips the directory listing down to file names only
+5. move B.txt into the same folder as A.txt 
+6. type fc A.txt B.txt #generates all differences between 2 direcotories 
+6. type fc A.txt B.txt > differences.txt #generates a file with all differences between directories 
+
+#compare 2 files on different computers / networks 
+ssh user@remote_host "cat remote_file.txt" | diff - local_file.txt
+
+#copy current directory to clipboard 
+pwd | pbcopy
+
+#view all containers running on linux server (command line )
+docker ps 
+
+#show all files in directory and display all subdirectories, and list in sorted order 
+dir /s /b /o:gn 
+tree /f
+
+#list files not folders 
+dir ..\myfolder /b /s /A-D /o:gn>list.txt
+
+#find all python verions installed 
+ ls -ls /usr/bin/python*
+
+#start jupyter
+jupyter notebook --port 57758
+
+#sex proxy for python session (set in cmd) 
+set http_proxy=http://amweb.ey.net:8080
+
+#install packages through firewall (EY FIREWALL)
+pip install --proxy=http://amweb.ey.net:8080 imblearn
+pip install --proxy=http://amweb.ey.net:8080 PyPAC
+pip install --proxy=http://amweb.ey.net:8080 keras-self-attention
+pip install --proxy=http://amweb.ey.net:8080 autokeras
+pip install --proxy=http://amweb.ey.net:8080 hyperas
+pip install --proxy=http://amweb.ey.net:8080 feedparser
+pip install --proxy=http://amweb.ey.net:8080 envoy
+pip install --proxy=http://amweb.ey.net:8080 prettytable
+pip install --proxy=http://amweb.ey.net:8080 eif
+pip install --proxy=http://amweb.ey.net:8080 patsy
+pip install --proxy=http://amweb.ey.net:8080 markov_clustering
+pip install --proxy=http://amweb.ey.net:8080 levenstine
+
+python -m spacy download --proxy=http://amweb.ey.net:8080  en_core_web_sm
+
+
+#list top 10 processes by memory usage
+ps aux --sort=-%mem | awk 'NR<=10{print $0}'
+
+#get all python installed packages 
+installed_packages = pip.get_installed_distributions()
+
+#rename a directory (renmae directory foo to bar) 
+mv foo bar
+
+#detailed file directory information 
+ls -d "$PWD"/* > listOfFiles.list #list absolute path of all files in a directory 
+ls -l | grep "^d" #view all directories 
+ls -tl  #sort files by time of last edit and display last edit time
+ls -d */ #list only directories in current folder 
+ls -l ##extended form of all directory info
+ls -a ##show all files including hidden files in directory 
+ls -c -l ##show all files in order of creation date 
+ls -c -t ##sort all files in order of creation date
+ls -m ##show all files in a single comma delimited string
+ls -c -x ##sort all files in order of last time accessed or opened
+ls -lS #sort all files in order of size 
+
+##########
+####mv####
+##########
+#moving files from one directory to another 
+#move all jupyter notebook files from CCAR folder to personal folder 
+mv /home/docadmin/CCAR_POC/CCAR_OCR_ZJC_10_5_DEMO.ipynb "/home/docadmin/ZackC/Final OCR Scripts/"
+mv /home/docadmin/CCAR_POC/*.ipynb "/home/docadmin/ZackC/Final OCR Scripts/OCR_Misc/"
+mv "/home/docadmin/CCAR_POC/Final OCR Scripts/"*.ipynb "/home/docadmin/ZackC/Final OCR Scripts/OCR_Misc/"
+mv "/home/docadmin/doc_review/"*.ipynb "/home/docadmin/ZackC/Final OCR Scripts/OCR_Misc/"
+cp ./Elmo_test_run.py "/stage/allennlp/"
+cp /stage/allennlp/Elmo_test_run.py "./Inputs/stage/allennlp/"
+
+mv /home/docadmin/ZackC/OCR_2018/OCRScripts.ipynb "/home/docadmin/ZackC/OCR_2018/PythonScripts/"
+mv "/home/docadmin/doc_review/"*.ipynb "/home/docadmin/ZackC/Final OCR Scripts/OCR_Misc/"
+mv "/home/docadmin/ZackC/OCR_2018/PythonScripts/"*.ipynb "/home/docadmin/ZackC/OCR_2018/PythonScripts/WorkingFiles/WF_Articles_Incorp"
+
+############
+#COPY FILES FROM ONE DIRECTORY TO ANOTHER WITH A SPECIFIC EXTENSION#
+############
+#copy all pdf files from folder 1 to folder 2
+cp /home/docadmin/python/ocr/samples/*.pdf /home/docadmin/python/ocr/samples/PDFS/ 
+cp "/home/docadmin/doc_review/doc_review/*.ipynb" "/home/docadmin/ZackC/Final OCR Scripts/OCR_Misc/"
+cp "/home/docadmin/ZackC/NN_Gitlab/sourcefile/TestList_v2.xlsx" "/home/docadmin/ZackC/NegNews/sourcefile/"
+
+mv "/home/docadmin/doc_review/"*.ipynb "/home/docadmin/ZackC/Final OCR Scripts/OCR_Misc/"
+mv "/home/docadmin/ZackC/NegNews/"*.xlsx "/home/docadmin/ZackC/"
+
+##########
+###GREP###
+##########
+#search for all files containing the string 'check'
+#using * will omit all hidden files that are in the current working directory 
+grep ocr_test* -lR 
+grep -rl ocr_test . 
+grep -rl "ocr_test" .
+
+###############
+#find function#
+###############
+#-c : returns a filename followed by : and a number indicating how many times the search string appears in the given file 
+#-v : takes the output from the first grep search, filters out the files with zero results, and print out just the files with non zero - results 
+ #search from the current directory for the keyword
+find . -type f -exec grep -l ocr_test {} +
+find / -type f | grep "scraped_" * #search from the root directory for keyword 
+
+#find all files with the string 'pattern' contained within the file (like the body of the file, not the name of the file) 
+grep -rnw '/path/to/somewhere/' -e 'pattern'
+grep -rnw '/path/to/somewhere/' -e 'starting job'
+grep -rnw '/' -e 'import pytorch'
+
+#find all files with .py extension that contain a specific string 
+grep --include=\*.{py, ipynb} -rnw '/home/nlpsomnath/NegNews/' -e "import pytorch"
+grep -Rl "import pytorch" /
+find . -name '*.py' -exec grep -i 'import pytorch' {} \; -print
+grep -inr "pytorch" /home/nlpsomnath/NegNews/
+
+#find files containing the string 'ocr' in the filename 
+#-iname: used to indicate case insensative when searching (i.e. file = File)
+find -iname "ocr"
+
+#find all files containing ocr in name that are on the system 
+find / -iname "ocr" 
+
+#count total number of files with ocr_test in name 
+#pop the output into a counter to get total observations as output instead of all unique values found 
+find -name ocr_test.* | wc -l
+
+#find all files ending in .ipynb
+find / -type f -name "*cr_test.py"
+find / -type f -name "*.git"
+find / -type f -name "*.vimrc"
+
+find / -type f -name "config_spacy*"
+#find all files ending in cr_test.py that are less than 50 meg in size 
+find / -size +7M -type f -name "*cr_test.py"
+
+#find all files modified within the last day 
+find / -mtime 1 
+
+#find all files modified in last minute 
+find / -mmin -1 
+
+#files that have been accessed <24 hours ago 
+find / -atime -1 
+
+#find all files with OCR in the name that are at max 2 levels deeper in the file structure then the current directory 
+find -maxdepth 23 -iname "OCR_TEST.*"
+find -mindepth 10 -maxdepth 23 -iname "OCR_TEST.*"
+
+#USING OR/AND with find
+#find any file with ocr_test or nlp in the fle name 
+find -mindepth 2 -maxdepth 23 -iname "OCR_TEST.*" -or -iname "nlp_test.*"
+
+#find all files with .html extension using 03 optimization allowing find to follow symbolic links -L searing the entire directory tree beneath the root specificed for files ending in .html
+find -O3 -L /var/www/ -name "*.html"
+find -O3 -L /var/www/ -name "scrapyd.conf"
+tree -P 'scrapyd.*' 
+find . -path \*/scrapyd/scrapyd.conf
+find . > \*/scrapyd/ 2> >(grep -v 'Permission denied' >&2)
+find / -name scrapyd.conf  2>&1 | grep -v "Permission denied"
+############
+##FIND END##
+############
+
+#creating file structure dynamically 
+#create a directory structure in a temporary directory. 
+#It will contain three levels of directories, with ten directories at the first level.
+#Each directory (including the temp directory) will contain ten files and ten subdirectories.
+cd
+mkdir -p ~/test/level1dir{1..10}/level2dir{1..10}/level3dir{1..10}
+touch ~/test/{file{1..10},level1dir{1..10}/{file{1..10},level2dir{1..10}/{file{1..10},level3dir{1..10}/file{1..10}}}}
+cd ~/test
+
+#remove directory and all files associated with directory 
+rm -rf mydir 
+
+##########
+#SED Utility: command line tool used to conduct find / replace/ search like functionality on a file without actually having to open that file. 
+##########
+#ex1: replace unix with linux in geekfile.txt (#s specifices substitution operation #"/" are delimiters #unix is the search pattern, linux is the replacement string) 
+sed 's/unix/linux/' geekfile.txt
+
+#ex2: Replace the 2nd occurance of the word unix with linux in a line(command executed on each line in the file) 
+sed 's /unix/linux/2' geekfile.txt 
+
+#ex3: replacing all occurnaces of the pattern in a line 
+sed 's/unix/linux/g' geekfile.txt
+
+#ex4: Replacing from nth occurrence to all occurrences in a line(replace all occurances from 3rd to nth) 
+sed 's/unix/linux/3g' geekfile.txt
+
+#ex4: Replacing string on a specific line number : You can restrict the sed command to replace the string on a specific line number.
+sed '3 s/unix/linux/' geekfile.txt
+
+#ex5: print all lines where replacement occured(-n surpresses duplicate rows generated by the -p flag and prints the replaced lines only one time) 
+$sed -n 's/unix/linux/p' geekfile.txt
+
+#ex6: replace string on a range of lines(here lines 1 through 3): 
+sed '1,3 s/unix/linux/' geekfile.txt
+
+#ex7: replace all occurnaces from the 2nd to last line in the file ($ denotes the last line in the file) 
+sed '2,$ s/unix/linux/' geekfile.txt
+
+#ex8: Delete line from file (1. delete line 5, 2.delete last line, 3. delete lines ranging form 3 to 6)
+sed '5d' filename.txt
+sed '$d' filename.txt
+sed '3,6d' filename.txt
+#CREATE / STORE INFORMATION AS LOCAL VARIABLES IN TERMINAL 
+export LocalVariable=”/home/path/to/my_example”
+
+
+
+
+################################
+##checking virtual enviornments#
+################################
+
+################################
+#############PYTHON#############
+################################
+#download package and ignore all past / cache installs 
+pip install --ignore-installed --upgrade tensorflow 
+
+#function to check if package is installed
+from imp import find_module
+def checkPythonmod(mod):
+    try:
+        op = find_module(mod)
+        return True
+    except ImportError:
+        return False
+
+		
+#download and convert embedddings to pymag		
+#wget word embeddings within the folder you want to store them in,in original format 
+wget https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.ja.300.bin.gz
+
+#convert .vec word embedding format into .magnitude format 
+#linux synatx: python -m pymagnitude.converter -i <PATH TO FILE TO BE CONVERTED> -o <OUTPUT PATH FOR MAGNITUDE FILE>
+python -m pymagnitude.converter -i /home/nlpsomnath/NegNews/rebase/NN_Kafka/sourcefiles/wiki.pt.vec -o /home/nlpsomnath/NegNews/rebase/NN_Kafka/sourcefiles/wiki.pt.magnitude
+python -m pymagnitude.converter -i /home/nlpsomnath/NegNews/rebase/NN_Kafka/sourcefiles/cc.ja.300.bin -o /home/nlpsomnath/NegNews/rebase/NN_Kafka/sourcefiles/cc.ja.300.magnitude
+	
+##########################################	
+#create file from command line using echo# 
+##########################################
+#echo from flask import Flask >> index.py
+#echo #create instance of web app  >> index.py
+#echo # __name__ is a special puthon variable and will = "__main__" if  >> index.py
+#echo #the module(pythonfile) is being executed as the main program >> index.py
+#echo app = Flask(__name__) >> index.py
+#echo #@app.route('/'): defines the routes, setting route to "/" will execute the  >> index.py
+#echo #code when we access localhost:5000/. >> index.py
+#echo #Note: if you set route to '/subfolder1', then the app will be shown if we access localhost:5000/subfolder1 >> index.py
+#echo app = Flask(__name__) >> index.py
+#echo @app.route('/') >> index.py
+#echo def hello_world(): >> index.py
+#echo    return('Hello,World!') >> index.py
+
+
+#HTTP GET VS POST VS PUT 
+	##GET: used to request data from a specified resource(the string query(name/value paris) is sent in the URL of a GET request 
+	(ex1.http://localhost:6005/single?name=bolun%20yang)
+	(ex2. http://localhost:6006/sql)
+	##POST:the data sent to the server with POST is stored int he request body of the HTTP request
+	(ex1.)
+	##PUT: used to send data to a server to create/update a rsource (calling the same PUT request multiple times will always produce the same result) 
+	(ex.1)
+
+#VSCODE 
+https://stackoverflow.com/questions/43427631/how-to-add-multiple-terminal-in-vs-code
+
+#best practices (process monitoring) 
+#The Observer Pattern: https://en.wikipedia.org/wiki/Observer_pattern
