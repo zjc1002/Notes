@@ -3,6 +3,7 @@ dev
 
 #executable paths to activate 
 C:\Users\zjc10\Desktop\Projects\envs\dev\Scripts\activate.bat
+C:\Users\Wildcard\Desktop\Projects\envs\dev\Scripts\activate.bat
 
 #use sys to check if working in virtual env 
 sys.base_prefix #prefix of the root executable the python env was built from 
