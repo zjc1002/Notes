@@ -1,0 +1,7 @@
+#Dual boot setup
+http://linuxbsdos.com/2015/11/02/dual-boot-kubuntu-15-10-and-windows-10-on-a-pc-with-uefi-firmware/
+https://medium.com/bigdatarepublic/dual-boot-windows-and-linux-aa281c3c01f9
+https://medium.com/@kimma1261/a-simplified-guide-to-installing-dual-boot-of-windows-10-and-ubuntu-for-absolute-beginners-16c09cd21aa7
+
+#gpu based container deployment
+https://docs.nvidia.com/deeplearning/frameworks/preparing-containers/index.html
